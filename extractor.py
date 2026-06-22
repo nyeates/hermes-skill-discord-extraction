@@ -55,8 +55,7 @@ def print_simulated_command(args, token):
     # Reconstruct the command similar to run_cli
     redacted_token = "<REDACTED_TOKEN>"
     cmd = [str(CLI_PATH)] + args + ["-t", redacted_token]
-    print(f"\n[SIMULATED COMMAND]: {' '.join(cmd)}")
-
+    print(f"\n[SIMULATED COMMAND]: {' '.join(cmd)}\n")
 
 def parse_list_output(output):
     """
@@ -168,12 +167,12 @@ def main():
     output_dir.mkdir(parents=True, exist_ok=True)
     
     base_filename = f"export_{channel_selection['id']}"
-    html_path = output_dir / f"{base_filename}.html"
+    csv_path = output_dir / f"{base_filename}.csv"
 
     # 5. Safety Check (Tiny Test)
     print("\n--- Safety Check: Running a tiny test export (last 5 messages) ---")
     print(f"Planned Output Directory: {output_dir}")
-    print(f"Format: HTML (HtmlDark)")
+    print(f"Format: CSV")
     print(f"Media: {'Enabled' if media_choice else 'Disabled'}")
     
     confirm = input("\nProceed with full export? (y/n): ").strip().lower()
@@ -194,12 +193,12 @@ def main():
         args_base.append("--media")
     
     # Show simulated command
-    print_simulated_command(args_base + ["-f", "HtmlDark", "-o", str(html_path)], token)
+    print_simulated_command(args_base + ["-f", "Csv", "-o", str(csv_path)], token)
     
-    # Run HTML
-    html_args = args_base + ["-f", "HtmlDark", "-o", str(html_path)]
-    print(f"Exporting HTML to {html_path}...")
-    run_cli(html_args, token)
+    # Run CSV
+    csv_args = args_base + ["-f", "Csv", "-o", str(csv_path)]
+    print(f"Exporting CSV to {csv_path}...")
+    run_cli(csv_args, token)
 
     # 7. Metadata
     metadata = {
@@ -208,10 +207,10 @@ def main():
         "guild": {"id": guild_selection['id'], "name": guild_selection['name']},
         "channel": {"id": channel_selection['id'], "name": channel_selection['name']},
         "date_range": {"start": start_date or "beginning", "end": end_date or "now"},
-        "formats": ["html"],
+        "formats": ["csv"],
         "media_enabled": media_choice,
         "output_files": {
-            "html": str(html_path)
+            "csv": str(csv_path)
         }
     }
     

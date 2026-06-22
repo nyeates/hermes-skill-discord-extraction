@@ -1,8 +1,8 @@
 ---
 name: discord-extraction
-description: Interactively export Discord chat history using DiscordChatExporter.
+category: social-media
+description: Interactively exports Discord chat history to CSV using DiscordChatExporter.
 ---
-
 # Discord Extraction Skill
 
 ## Purpose
@@ -36,30 +36,31 @@ python3 ~/.hermes/skills/social-media/discord-extraction/extractor.py
 ### Workflow
 1. **Auth Check:** The script verifies your token exists locally.
 2. **Discovery:** 
-   - It attempts to list your accessible **Guilds (Servers)**. Select one from the list.
-   - It attempts to list **Channels** within that guild. Select one.
-   - *Note: If discovery fails, you can enter IDs manually.*
+    - It attempts to list your accessible **Guilds (Servers)**. Select one from the list.
+    - It attempts to list **Channels** within that guild. Select one.
+    - *Note: If discovery fails, you can enter IDs manually.*
 3. **Configuration:**
-   - Set a **Start Date** and **End Date** (`YYYY-MM-DD`).
-   - Choose whether to download **Media/Assets** (Yes/No).
-   - Choose the output format (JSON and HTML are both generated).
-4. **Safety Check:** The script will summarize the planned export and ask for confirmation before proceeding.
-5. **Execution:** The export runs. Large histories may take several minutes.
+    - Set a **Start Date** and **End Date** (`YYYY-MM-DD`).
+    - Choose whether to download **Media/Assets** (Yes/No).
+4. **Simulated Command:** The script will display a redacted version of the command to be executed for your review.
+5. **Execution:** The script performs a CSV export to the organized directory.
+6. **Simplification (Optional):** To remove excess noise (emojis, repetitive timestamps) from the raw CSV, run the local simplification utility:
+    ```bash
+    python3 ~/.hermes/skills/social-media/discord-extraction/simplify.py <path_to_csv>
+    ```
 
 ## Outputs
 Exports are organized cleanly in:
-`~/exports/discord/<server_name>/<channel_name>/<date_range>/`
+`~/exports/discord/<server-name>/<channel-name>/<date-range>/`
 
 Each export folder contains:
-- `export_<channel_id>.json`: Machine-readable data.
-- `export_<channel_id>.html`: Human-readable, styled chat view.
+- `export_<channel_id>.csv`: Machine-readable CSV data.
 - `metadata.json`: Details about the extraction (timestamp, IDs, date range, etc.).
-
-## Pitfalls
-- **CLI Argument Ordering:** The `DiscordChatExporter.Cli` is sensitive to argument order. The authentication token (`-t` or `--token`) **must** follow the specific command (e.g., `discord-chat-exporter-cli guilds -t <token>`). Placing it before the command or as a global flag may result in an `Unrecognized option(s)` error.
-- **Token Permissions:** If you encounter "Unauthorized" errors, ensure your token is a valid user token and that the account has access to the requested guilds/channels.
 
 ## Security & Safety
 - **Read-Only:** This skill only uses "view" and "export" commands. It will **not** send, edit, or delete any messages.
 - **Zero-Leak Policy:** The `DISCORD_TOKEN` is read strictly within the local Python script and is never exposed to the LLM or printed to the terminal.
-- **Metadata Privacy:** The generated `metadata.json` files are automatically created with all relevant IDs but **redact the token**.
+- **Metadata Privacy:** The generated `metadata.json` contains all relevant IDs but **redacts the token**.
+
+## Troubleshooting & Implementation Details
+For specific troubleshooting steps regarding CLI argument ordering or format string requirements, refer to the [Debugging Notes](references/debugging-notes.md).
