@@ -4,6 +4,8 @@
 
 This file describes a repeatable approach for analyzing large Discord community exports and turning raw chat into useful product, support, community, and documentation intelligence.
 
+Use this after following `EXTRACT.md` to produce the export input for analysis.
+
 The goal is not to summarize “what people talked about.” The goal is to identify durable patterns:
 
 - who appears active and what informal or formal roles they play
@@ -19,6 +21,8 @@ This analysis should treat Discord as a directional community sample, not a comp
 ## Input assumptions
 
 Discord exports may vary widely. The analysis should adapt to the available structure.
+
+The input may be a raw export or a simplified derivative, but it should preserve enough structure to trace findings back to source dates, channels, speakers, and raw references where possible.
 
 Common useful fields include:
 
