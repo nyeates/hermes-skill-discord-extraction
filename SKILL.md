@@ -66,7 +66,11 @@ Each export folder contains:
 ## Troubleshooting & Implementation Details
 For specific troubleshooting steps regarding CLI argument ordering or format string requirements, refer to the [Debugging Notes](notes/debugging-notes.md).
 For Hermes-facing integration design notes, refer to [Hermes Chat Integration](notes/hermes-chat-integration.md).
-For Git/GitHub attribution behavior when publishing this skill repo, refer to [GitHub Identity Notes](notes/github-identity.md).
+
+## Repo Content Scope
+- Keep `SKILL.md` simple and functional.
+- Do not embed private rationale, job-application framing, migration plans, or chat-specific troubleshooting into the repo artifact unless it directly helps future users of the skill.
+- Prefer repo-relevant workflow guidance over meta-commentary about how the conversation unfolded.
 
 ## Pitfalls
 - **Do not conflate progress-display planning with user-input integration planning.** Treat them as separate concerns.
