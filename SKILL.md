@@ -65,6 +65,8 @@ Each export folder contains:
 
 ## Troubleshooting & Implementation Details
 For specific troubleshooting steps regarding CLI argument ordering or format string requirements, refer to the [Debugging Notes](references/debugging-notes.md).
+For Hermes-facing integration design notes, refer to [Hermes Chat Integration](references/hermes-chat-integration.md).
+For Git/GitHub attribution behavior when publishing this skill repo, refer to [GitHub Identity Notes](references/github-identity.md).
 
 ## Pitfalls
 - **Do not conflate progress-display planning with user-input integration planning.** Treat them as separate concerns.
@@ -75,3 +77,6 @@ For specific troubleshooting steps regarding CLI argument ordering or format str
   3. Let Hermes ask the questions in chat (guild, channel, dates, media).
   4. Invoke the wrapper in non-interactive mode with those collected parameters.
 - **Use PTY only when terminal-emulation behavior is specifically desired.** It is a fallback, not the default design.
+- **For human-readable exports, prefer CSV plus a post-processing simplifier over raw JSON.** JSON exports are bulky and hard to skim for conversation-only review; keep the exporter focused on CSV when the downstream workflow is text simplification.
+- **DiscordChatExporter format names are exact enums.** Use supported values such as `Csv`, `Json`, `HtmlDark`, or `HtmlLight`; plain `Html` is rejected.
+- **GitHub commit attribution is controlled by email mapping, not just git author name.** If commits should not resolve to an unintended GitHub account, use a `users.noreply.github.com` address for the intended account.
