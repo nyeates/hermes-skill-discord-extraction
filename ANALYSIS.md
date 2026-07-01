@@ -33,6 +33,8 @@ Common useful fields include:
 
 If the export lacks stable message links, time-of-day timestamps, channel metadata, or reply threading, state that limitation clearly. Do not invent precision that the source does not support.
 
+If only day-level timestamps are available, cite by date plus raw reference and avoid response-lag claims more precise than the source allows.
+
 ## High-level workflow
 
 Use a map → reduce → synthesize workflow.
@@ -69,6 +71,8 @@ Recommended message object:
 Preserve raw references where possible. Later findings should be traceable back to dates, users, line numbers, or message links.
 
 Normalize obvious export artifacts, but do not over-clean the text. Typos, repeated phrasing, and user frustration often contain useful signal.
+
+Before close reading, it can help to generate lightweight scaffolding such as top speakers, question counts, keyword buckets, and response-like concentration. Use this to guide sampling, not as the conclusion.
 
 ## Chunking strategy
 
@@ -117,7 +121,7 @@ For each important actor, capture:
 - whether the role is direct evidence or inference
 - caveats
 
-Be careful with language. Prefer “appears to,” “seems to,” or “functions as” when formal status is uncertain.
+Be careful with language. Prefer “appears to,” “seems to,” or “functions as” when formal status is uncertain. A prolific responder may still be a volunteer or power user, not staff.
 
 ## Distinguishing evidence from inference
 
@@ -258,6 +262,7 @@ Examples:
 - improved incident/status messaging
 - community office hours or onboarding sessions
 - a recurring voice-of-community digest for product/support teams
+- a release-readiness checklist syncing docs, UI labels, support macros, and status messaging
 
 Phrase these as possible leverage areas, not demands.
 

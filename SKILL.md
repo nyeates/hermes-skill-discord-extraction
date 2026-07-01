@@ -30,7 +30,7 @@ The skill requires the `DiscordChatExporter.Cli` executable.
 To start an interactive export, run the following command from your terminal:
 
 ```bash
-python3 ~/.hermes/skills/social-media/discord-extraction/extractor.py
+python3 ~/.hermes/skills/social-media/discord-extraction/scripts/extractor.py
 ```
 
 ### Workflow
@@ -46,9 +46,9 @@ python3 ~/.hermes/skills/social-media/discord-extraction/extractor.py
 5. **Execution:** The script performs a CSV export to the organized directory.
 6. **Simplification (Optional):** To remove excess noise (emojis, repetitive timestamps) from the raw CSV, run the local simplification utility:
     ```bash
-    python3 ~/.hermes/skills/social-media/discord-extraction/simplify.py <path_to_csv>
+    python3 ~/.hermes/skills/social-media/discord-extraction/scripts/simplify.py <path_to_csv>
     ```
-7. **Hermes Chat Integration Planning:** When bringing this workflow into Hermes chat, keep the plan simple: Hermes should ask the user for guild/channel/date inputs itself, and the extraction script should act as a parameterized backend. Avoid trying to mirror `input()` prompts through a PTY unless you explicitly want terminal-emulation behavior. See `references/hermes-chat-integration.md`.
+7. **Hermes Chat Integration Planning:** When bringing this workflow into Hermes chat, keep the plan simple: Hermes should ask the user for guild/channel/date inputs itself, and the extraction script should act as a parameterized backend. Avoid trying to mirror `input()` prompts through a PTY unless you explicitly want terminal-emulation behavior. See `notes/hermes-chat-integration.md`.
 
 ## Outputs
 Exports are organized cleanly in:
@@ -64,9 +64,9 @@ Each export folder contains:
 - **Metadata Privacy:** The generated `metadata.json` contains all relevant IDs but **redacts the token**.
 
 ## Troubleshooting & Implementation Details
-For specific troubleshooting steps regarding CLI argument ordering or format string requirements, refer to the [Debugging Notes](references/debugging-notes.md).
-For Hermes-facing integration design notes, refer to [Hermes Chat Integration](references/hermes-chat-integration.md).
-For Git/GitHub attribution behavior when publishing this skill repo, refer to [GitHub Identity Notes](references/github-identity.md).
+For specific troubleshooting steps regarding CLI argument ordering or format string requirements, refer to the [Debugging Notes](notes/debugging-notes.md).
+For Hermes-facing integration design notes, refer to [Hermes Chat Integration](notes/hermes-chat-integration.md).
+For Git/GitHub attribution behavior when publishing this skill repo, refer to [GitHub Identity Notes](notes/github-identity.md).
 
 ## Pitfalls
 - **Do not conflate progress-display planning with user-input integration planning.** Treat them as separate concerns.
@@ -79,4 +79,3 @@ For Git/GitHub attribution behavior when publishing this skill repo, refer to [G
 - **Use PTY only when terminal-emulation behavior is specifically desired.** It is a fallback, not the default design.
 - **For human-readable exports, prefer CSV plus a post-processing simplifier over raw JSON.** JSON exports are bulky and hard to skim for conversation-only review; keep the exporter focused on CSV when the downstream workflow is text simplification.
 - **DiscordChatExporter format names are exact enums.** Use supported values such as `Csv`, `Json`, `HtmlDark`, or `HtmlLight`; plain `Html` is rejected.
-- **GitHub commit attribution is controlled by email mapping, not just git author name.** If commits should not resolve to an unintended GitHub account, use a `users.noreply.github.com` address for the intended account.
