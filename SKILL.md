@@ -18,6 +18,8 @@ This skill supports two related workflows:
 1. Use `EXTRACT.md` to produce a local export.
 2. Simplify the export; detailed instructions are in `EXTRACT.md`.
 3. Use `ANALYSIS.md` to analyze the resulting data.
+   - Default to the cleaned text export for LLM analysis when it preserves enough evidence.
+   - Keep the CSV beside it as a forensic fallback for exact timestamps, multiline attribution, links, reactions, and other dropped structure.
 
 ## Key repo structure
 - `SKILL.md` — router and workflow entrypoint

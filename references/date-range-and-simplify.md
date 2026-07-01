@@ -31,4 +31,8 @@ Expected behavior:
 - write a sibling file named `<csv_stem>_clean.txt`
 - preserve date-grouped readable text output for quick review
 
+Analysis note:
+- prefer the cleaned `.txt` as the first-pass LLM input when it preserves enough evidence
+- keep the CSV alongside it as the source of truth for exact timestamps, links, reactions, and multiline message boundaries if the simplifier is lossy
+
 This matches the documented workflow better than hardcoded `raw.csv` / `clean.txt` paths.
