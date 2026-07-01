@@ -24,6 +24,15 @@ Discord exports may vary widely. The analysis should adapt to the available stru
 
 The input may be a raw export or a simplified derivative, but it should preserve enough structure to trace findings back to source dates, channels, speakers, and raw references where possible.
 
+Prefer analyzing a **simplified text derivative** (for example a cleaned `.txt` produced from the CSV export) over raw CSV or JSON when the simplified file preserves the evidence needed for the task. In practice, this should usually be the default starting point for LLM analysis because:
+
+- raw CSV/JSON often contains structural noise that adds tokens without adding insight
+- simplified text keeps the message content front-and-center
+- cleaner inputs reduce context overload and make chunking easier
+- this lowers the chance that metadata fields drown out the actual conversation signal
+
+Use raw CSV/JSON only when the analysis specifically needs fields that the simplified text dropped, such as exact timestamps, reactions, thread structure, attachments, links, or stable raw identifiers.
+
 Common useful fields include:
 
 - date or timestamp

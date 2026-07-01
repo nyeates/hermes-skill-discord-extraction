@@ -23,6 +23,7 @@ This skill supports two related workflows:
 - `SKILL.md` — router and workflow entrypoint
 - `EXTRACT.md` — extraction workflow
 - `ANALYSIS.md` — community analysis workflow
+- `references/date-range-and-simplify.md` — inclusive date filtering, safe test-export pattern, and `simplify.py` behavior
 - `scripts/` — runnable Python helpers
 - `notes/` — side notes and implementation notes
 
