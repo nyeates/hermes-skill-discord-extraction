@@ -55,7 +55,11 @@ def main() -> None:
             content = row["Content"].strip()
 
             if content:
-                g.write(f"{author}: {content}\n")
+                for line in content.splitlines():
+                    if line.strip():
+                        g.write(f"{author}: {line}\n")
+                    else:
+                        g.write("\n")
 
     print(out)
 
