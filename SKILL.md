@@ -48,6 +48,7 @@ python3 ~/.hermes/skills/social-media/discord-extraction/extractor.py
     ```bash
     python3 ~/.hermes/skills/social-media/discord-extraction/simplify.py <path_to_csv>
     ```
+7. **Hermes Chat Integration Planning:** When bringing this workflow into Hermes chat, keep the plan simple: Hermes should ask the user for guild/channel/date inputs itself, and the extraction script should act as a parameterized backend. Avoid trying to mirror `input()` prompts through a PTY unless you explicitly want terminal-emulation behavior. See `references/hermes-chat-integration.md`.
 
 ## Outputs
 Exports are organized cleanly in:
@@ -64,3 +65,13 @@ Each export folder contains:
 
 ## Troubleshooting & Implementation Details
 For specific troubleshooting steps regarding CLI argument ordering or format string requirements, refer to the [Debugging Notes](references/debugging-notes.md).
+
+## Pitfalls
+- **Do not conflate progress-display planning with user-input integration planning.** Treat them as separate concerns.
+- **Do not default to PTY relay for Hermes chat integration.** PTY can expose interactive prompts, but chat replies are not automatically wired to the subprocess stdin. That path requires output parsing plus `process submit` orchestration and is more brittle than necessary.
+- **Prefer a split architecture for Hermes integration:**
+  1. Keep DiscordChatExporter as the extraction engine.
+  2. Refactor the Python wrapper into reusable functions / non-interactive arguments.
+  3. Let Hermes ask the questions in chat (guild, channel, dates, media).
+  4. Invoke the wrapper in non-interactive mode with those collected parameters.
+- **Use PTY only when terminal-emulation behavior is specifically desired.** It is a fallback, not the default design.
