@@ -72,11 +72,11 @@ python3 ~/.hermes/skills/social-media/discord-extraction/scripts/extractor.py
    - Show a redacted version of the command before execution.
 6. **Export execution**
    - Run the export and save results into the organized output folder.
-7. **Optional simplification**
-   - Post-process the CSV if a cleaner human-readable artifact is needed.
+7. **Simplification**
+   - Post-process the CSV so the workflow consistently produces a cleaner human-readable artifact for downstream review and analysis.
 
-## Optional post-processing
-To simplify raw CSV output:
+## Post-processing
+After export, simplify the raw CSV output:
 ```bash
 python3 ~/.hermes/skills/social-media/discord-extraction/scripts/simplify.py <path_to_csv>
 ```

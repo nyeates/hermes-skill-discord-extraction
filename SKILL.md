@@ -16,7 +16,7 @@ This skill supports two related workflows:
 
 ## Typical workflow
 1. Use `EXTRACT.md` to produce a local export.
-2. Optionally clean or simplify the export with files in `scripts/`.
+2. Simplify the export; detailed instructions are in `EXTRACT.md`.
 3. Use `ANALYSIS.md` to analyze the resulting data.
 
 ## Key repo structure
